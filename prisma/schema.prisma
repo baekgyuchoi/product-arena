@@ -1,0 +1,178 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextIndex", "fullTextSearch"]
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model WebDesignArticles {
+  id          Int      @id @default(autoincrement())
+  title       String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  authorId    Int?
+  keywordId   Int
+  content     String?  @db.Text
+  has_content Boolean  @default(false)
+
+  @@index([authorId], map: "_WebDesignArticles_authorId_index")
+  @@index([has_content], map: "_WebDesignArticles_has_content_index")
+  @@index([keywordId], map: "_WebDesignArticles_keywordId_index")
+}
+
+model WebDesignAuthors {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+}
+
+model WebDesignKeywords {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  tagId     Int
+  level     Int
+  used      Boolean  @default(false)
+
+  @@index([tagId], map: "_WebDesignKeywords_tagId_index")
+}
+
+model WebDesignTags {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+}
+
+model WebDesignArticlesToWebDesignTags {
+  A Int
+  B Int
+
+  @@unique([A, B], map: "_WebDesignArticlesToWebDesignTags_AB_unique")
+  @@index([B], map: "_WebDesignArticlesToWebDesignTags_B_index")
+  @@map("_WebDesignArticlesToWebDesignTags")
+}
+
+model ProductCategories {
+  id        Int           @id @default(autoincrement())
+  name      String        @unique
+  createdAt DateTime      @default(now())
+  updatedAt DateTime
+  slug      String        @unique
+  tags      ProductTags[]
+
+  @@fulltext([name])
+}
+
+model ProductRatingBreakdown {
+  id                Int      @id @default(autoincrement())
+  productId         Int      @unique
+  critical_reviews  String   @db.MediumText
+  positive_reviews  String   @db.MediumText
+  five_star_percent Int
+  one_star          Int
+  two_star          Int
+  three_star        Int
+  four_star         Int
+  five_star         Int
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  product           Products @relation(fields: [productId], references: [id])
+}
+
+model ProductDetails {
+  id                   Int      @id @default(autoincrement())
+  productId            Int      @unique
+  description          String?  @db.Text
+  size_guide_html      String?  @db.MediumText
+  image_extra_1        String?
+  image_extra_2        String?
+  image_extra_3        String?
+  feature_bullets_flat String?  @db.Text
+  a_plus_description   String?  @db.Text
+  specifications_flat  String?  @db.Text
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  attributes_flat      String?  @db.Text
+  brand                String?
+  asin                 String   @unique
+  keywords_list        String?  @db.Text
+  related_products     String?  @db.Text
+  product              Products @relation(fields: [productId], references: [id])
+
+  @@fulltext([feature_bullets_flat])
+  @@fulltext([specifications_flat])
+}
+
+model ProductTags {
+  id               Int               @id @default(autoincrement())
+  name             String            @unique
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime
+  categoryId       Int
+  slug             String            @unique
+  product_category ProductCategories @relation(fields: [categoryId], references: [id])
+  products         Products[]
+
+  @@index([categoryId], map: "_ProductTags_categoryId_index")
+  @@fulltext([name])
+}
+
+model Products {
+  id              Int                     @id @default(autoincrement())
+  name            String                  @unique
+  link            String                  @db.Text
+  aff_link        String                  @db.Text
+  imageURL        String?
+  rating          Float
+  ratings_total   Int
+  price           Float
+  recent_sales    String?
+  asin            String                  @unique
+  createdAt       DateTime                @default(now())
+  updatedAt       DateTime                @updatedAt
+  categoryId      Int                     @default(0)
+  product_rating  ProductRatingBreakdown?
+  tags            ProductTags[]
+  article         ProductArticle?
+  product_details ProductDetails?
+
+  @@fulltext([name])
+}
+
+model ProductArticle {
+  id                 Int      @id @default(autoincrement())
+  productId          Int      @unique
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  asin               String   @unique
+  review_description String?  @db.MediumText
+  product            Products @relation(fields: [productId], references: [id])
+}
+
+model ProductComparison {
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  asinconcat        String   @unique
+  content           String?  @db.MediumText
+  firstProductAsin  String
+  secondProductAsin String
+  retries           Int      @default(0)
+
+  @@id([firstProductAsin, secondProductAsin], name: "product_comparison_id")
+}
+
+model ProductTagsToProducts {
+  A Int
+  B Int
+
+  @@unique([A, B], map: "_ProductTagsToProducts_AB_unique")
+  @@index([B], map: "_ProductTagsToProducts_B_index")
+  @@map("_ProductTagsToProducts")
+}
