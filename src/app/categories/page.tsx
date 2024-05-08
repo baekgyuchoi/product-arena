@@ -20,7 +20,7 @@ const categories = [
 
 const AllCategoriesPage: React.FC = () => {
     return (
-        <div className="max-w-7xl mx-auto my-8 px-4">
+        <div className="max-w-7xl mx-auto my-8 px-4 mt-32">
             <h1 className="text-4xl font-bold text-center text-gray-900 mb-12">All Categories</h1>
             {categories.map((category, index) => (
                 <CategoryItem key={index} title={category.title} items={category.items} />

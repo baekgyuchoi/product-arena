@@ -1,25 +1,124 @@
+"use client"
 import Link from "next/link";
 import Image from "next/image";
 
 import { cn } from "../lib/utils";
 
 import MaxWidthWrapper from "../components/MaxWidthWrapper";
-import { buttonVariants } from "../components/ui/button";
-import { MobileNav } from "../components/MobileNav";
+
 import { Search } from "lucide-react";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+  NavigationMenuViewport,
+} from "./ui/navigation-menu"
+
 
 const Navbar = () => {
   // Replace with your auth of choice, e.g. Clerk: const { userId } = auth();
+
+  const menuItems = [
+    {
+      name: "Electronics",
+      subMenuItems: [
+        {
+          name: "Monitors",
+          href: "/categories/monitors",
+        },
+        {
+          name: "Laptops",
+          href: "/categories/laptops",
+        },
+        {
+          name: "Cameras",
+          href: "/categories/cameras",
+        },
+        {
+          name: "VR Headsets",
+          href: "/categories/vr-headsets",
+        },
+      ],
+    },
+    {
+      name: "Home Improvement",
+      subMenuItems: [
+        {
+          name: "Outdoor Grills",
+          href: "/categories/outdoor-grill",
+        },
+        {
+          name: "Couches",
+          href: "/categories/couches",
+        },
+        {
+          name: "Mattresses",
+          href: "/categories/mattresses",
+        },
+        {
+          name: "Bed Frames",
+          href: "/categories/bed-frames",
+        },
+        {
+          name: "Desks",
+          href: "/categories/desks",
+        },
+        {
+          name: "Chairs",
+          href: "/categories/chairs",
+        },
+        {
+          name: "Tables",
+          href: "/categories/tables",
+        },
+      ],
+    },
+    {
+      name: "Music",
+      subMenuItems: [
+        {
+          name: "Piano/Keyboards",
+          href: "/categories/piano-keyboards",
+        },
+        {
+          name: "Drums",
+          href: "/categories/drums",
+        },
+        {
+          name: "Brass",
+          href: "/categories/brass",
+        },
+        {
+          name: "Speaker",
+          href: "/categories/speaker",
+        },
+        {
+          name: "Headphones",
+          href: "/categories/headphones",
+        },
+        {
+          name: "Mics",
+          href: "/categories/mics",
+        },
+      ],
+    },
+
+  ]
 
 
   return (
     <nav
       className={cn(
-        "fixed h-16 inset-x-0 top-0 z-30 w-full bg-black  transition-all"
+        "fixed h-16 inset-x-0 top-0 z-30 w-full  transition-all"
       )}
     >
       <MaxWidthWrapper>
-        <div className="navbar w-full bg-base-100 rounded-lg">
+        <div className="navbar w-full bg-gradient-to-br from-gray-200 to-blue-800/50 rounded-lg shadow-lg mt-1">
           <div className="navbar-start ">
             <div className="dropdown">
               <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -27,20 +126,60 @@ const Navbar = () => {
               </div>
               <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                 <li>
-                  <a>Categories</a>
-                  <ul className="p-2">
-                    <li><a>Submenu 1</a></li>
-                    <li><a>Submenu 2</a></li>
-                  </ul>
+                  <a href="/categories">All Categories</a>
                 </li>
-                <li><a>Item 2</a></li>
-                <li><a>Item 3</a></li>
+                {menuItems.map((menuItem) => {
+                  return (
+                    <li key={menuItem.name}>
+                      <details>
+                        <summary>{menuItem.name}</summary>
+                        <ul className="p-2">
+                          {menuItem.subMenuItems.map((subMenuItem) => {
+                            return (
+                              <li key={subMenuItem.name}>
+                                <a href={subMenuItem.href}>{subMenuItem.name}</a>
+                              </li>
+                            )
+                          })}
+                        </ul>
+                      </details>
+                    </li>
+                  )
+                })}
+               
               </ul>
             </div>
             <a href="/" className="btn btn-ghost text-xl"><span className="font-black italic">Product<span className="text-blue-700">Arena</span></span></a>
           </div>
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle() } href="/categories">All Categories</NavigationMenuLink>
+                </NavigationMenuItem>
+                {menuItems.map((menuItem) => {
+                  return (
+                    <NavigationMenuItem key={menuItem.name}>
+                      <NavigationMenuTrigger className="bg-transparent">{menuItem.name}</NavigationMenuTrigger>
+                      <NavigationMenuContent>
+                     
+
+                        <NavigationMenuList className="grid w-[400px] gap-2 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                          {menuItem.subMenuItems.map((subMenuItem) => {
+                            return (
+                              <NavigationMenuItem key={subMenuItem.name} className="bg-gray-200  w-full rounded-lg flex items-center justify-center">
+                                <NavigationMenuLink className="underline font-semibold font-sans hover:text-blue-800" href={subMenuItem.href}>{subMenuItem.name}</NavigationMenuLink>
+                              </NavigationMenuItem>
+                            )
+                          })}
+                        </NavigationMenuList>
+                      </NavigationMenuContent>
+                    </NavigationMenuItem>
+                  )
+                })}
+              </NavigationMenuList>
+            </NavigationMenu>
+            {/* <ul className="menu menu-horizontal px-1">
               <li><a href='/categories'>All Categories</a></li>
               <li>
                 <details>
@@ -80,30 +219,8 @@ const Navbar = () => {
                     <li><a>Mics</a></li>
                   </ul>
                 </details>
-              </li>
-              {/* <li>
-                <details>
-                  <summary>Sports/Outdoors</summary>
-                  <ul className="p-2">
-                    <li><a>Submenu 1</a></li>
-                    <li><a>Submenu 2</a></li>
-                  </ul>
-                </details>
-              </li>
-              <li>
-                <details>
-                  <summary>Kids/Babies</summary>
-                  <ul className="p-2">
-                    <li><a>Toys</a></li>
-                    <li><a>Submenu 2</a></li>
-                  </ul>
-                </details>
-              </li> */}
-              
-            
-            
-              
-            </ul>
+              </li>          
+            </ul> */}
           </div>
           <div className="navbar-end">
             <a href="/search" className=" mr-4"><Search size='20' /></a>

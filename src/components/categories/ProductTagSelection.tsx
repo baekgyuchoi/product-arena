@@ -11,19 +11,25 @@ import {
     PaginationNext,
     PaginationPrevious,
   } from "../ui/pagination"
+import { ProductResult } from '@/src/lib/validators/ProductResult';
 
 interface ProductTagSelectionProps {
     tags_list: ProductTag[];
     default_tag?: ProductTag;
     category_slug: string;
+    product_1: ProductResult | null;
+    product_2: ProductResult | null;
+    setProduct_1_Data: React.Dispatch<React.SetStateAction<ProductResult | null>>;
+    setProduct_2_Data: React.Dispatch<React.SetStateAction<ProductResult | null>>;
 }
 
-const ProductTagSelection: React.FC<ProductTagSelectionProps> = ({ tags_list, default_tag, category_slug }) => {
+const ProductTagSelection: React.FC<ProductTagSelectionProps> = ({ tags_list, default_tag, category_slug, product_1, product_2, setProduct_1_Data, setProduct_2_Data }) => {
     // State to keep track of the selected tag
     const [selectedTag, setSelectedTag] = useState<ProductTag | null>(default_tag ||tags_list[0] || null);
     const [productInfoArray, setProductInfoArray] = useState([]);
     const [page_number, setPageNumber] = useState(1);
     const [max_page_number, setMaxPageNumber] = useState(1);
+    
 
     
     useEffect(() => {
@@ -65,7 +71,7 @@ const ProductTagSelection: React.FC<ProductTagSelectionProps> = ({ tags_list, de
             
             {productInfoArray && (
                 <Suspense fallback={<div>Loading...</div>}>
-                    <ProductGridContainer productArray={productInfoArray} selectedTag={selectedTag!} categorySlug={category_slug} />
+                    <ProductGridContainer productArray={productInfoArray} selectedTag={selectedTag!} categorySlug={category_slug} product_1={product_1} setProduct_1_Data={setProduct_1_Data} product_2={product_2} setProduct_2_Data={setProduct_2_Data}/>
                 </Suspense>
             )}
             <div className="my-4">

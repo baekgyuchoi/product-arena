@@ -7,6 +7,7 @@ import ProductSpecificationsTable from '../products/ProductSpecificationsTable';
 import ProductReviewArticleContainer from '../products/ProductReviewArticleContainer';
 import RelatedProductsBox from '../products/RelatedProductsBox';
 import prisma from '@/src/app/helper/db';
+import ProductBuyButton from '../products/ProductBuyButton';
 
 type Specification = {
     name: string;
@@ -60,9 +61,11 @@ const ComparisonTabsContent: React.FC<ComparisonTabsContentProps> = async (props
                 <div className='flex flex-col justify-between'>
                     <div className='mt-4 text-center'>
                         <span className='text-lg lg:text-xl font-semibold'>{productData.name}</span>
-                        <span>{productData.price}</span>
                     </div>
-                   
+                    <div className='mt-6'>
+                        <ProductBuyButton aff_link={productData.aff_link} price={productData.price} />
+                    </div>
+                    
                     <div>
                         
                         <ProductFeaturesBox features={features} />

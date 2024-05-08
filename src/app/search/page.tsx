@@ -3,6 +3,7 @@
 
 import React, { useState } from 'react';
 import Head from 'next/head';
+import SearchContainer from '@/src/components/search/SearchContainer';
 
 const SearchPage: React.FC = () => {
     const [productA, setProductA] = useState('');
@@ -19,10 +20,15 @@ const SearchPage: React.FC = () => {
             <Head>
                 <title>Product Comparison</title>
             </Head>
-            <div className="flex flex-col items-center justify-center min-h-screen py-12">
+            <div className='h-screen flex items-center' >
+                <SearchContainer />
+            </div>
+           
+            {/* <div className="flex flex-col items-center justify-center min-h-screen py-12">
                 <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Product Comparison Tool</h1>
                 <form onSubmit={handleSearch} className="space-y-6">
-                    <div className="flex gap-4">
+                    <div className="flex gap-4 w-full bg-black">
+                        
                         <input
                             type="text"
                             placeholder="Enter Product A"
@@ -45,7 +51,7 @@ const SearchPage: React.FC = () => {
                         Compare
                     </button>
                 </form>
-            </div>
+            </div> */}
         </>
     );
 };
