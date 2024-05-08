@@ -114,7 +114,7 @@ const Navbar = () => {
   return (
     <nav
       className={cn(
-        "fixed h-16 inset-x-0 top-0 z-30 w-full  transition-all"
+        "fixed h-18  inset-x-0 top-0 z-30 w-screen  transition-all"
       )}
     >
       <MaxWidthWrapper>

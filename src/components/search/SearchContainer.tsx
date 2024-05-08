@@ -9,10 +9,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select"
+import SearchCategorySelect from './SearchCategorySelect';
+import DualSearchInput from './DualSearchInput';
+import { ProductResult } from '@/src/lib/validators/ProductResult';
 
 
 interface SearchContainerProps {
   // Define your props here
+  categories: {name: string, slug: string, categoryId: number}[];
 }
 
 
@@ -20,39 +24,18 @@ interface SearchContainerProps {
 
 
 const SearchContainer:React.FC<SearchContainerProps> = (props) => {
-  const [category, setCategory] = useState(0); 
-  const [productA, setProductA] = useState('');
-  const [productB, setProductB] = useState('');
-  const category_list = [
-    {label: "Electronics", categories: [
-      {name: "monitors", slug: "monitors", categoryId: 1},
-      {name: "laptops", slug: "laptops", categoryId: 2},
-      {name: "cameras", slug: "cameras", categoryId: 3},
-    ]},
-    {label: "Home Improvement", categories: [
-      {name: "couches", slug: "couches", categoryId: 4},
-    ]},
-  ]
+  const [categoryId, setCategoryId] = useState<number|null>(null); 
+  const [productA, setProductA] = useState<ProductResult|null>(null);
+  const [productB, setProductB] = useState<ProductResult|null>(null);
+  const categories = props.categories;
 
   
-  
+  console.log("category: " + categoryId)
   return (
-    <>
-      <Select>
-        <SelectTrigger>
-          <SelectValue>{category}</SelectValue>
-        </SelectTrigger>
-        <SelectContent>
-          {category_list.map((category_group) => (
-            <SelectGroup key={category_group.label} >
-              {category_group.categories.map((category) => (
-                <SelectItem value={category.categoryId.toString()} key={category.categoryId} onClick={() => setCategory(category.categoryId)}>{category.name}</SelectItem>
-              ))}
-            </SelectGroup>
-          ))}
-        </SelectContent>
-      </Select>
-    </>
+    <div className='mt-40 flex flex-col lg:flex-row lg:ml-8 lg:mb-48 items-center justify-center w-full'>
+      <SearchCategorySelect categories={categories} categoryId={categoryId} setCategoryId={setCategoryId} />
+      <DualSearchInput categoryId={categoryId} product_1={productA} product_2={productB} setProduct_1_Data={setProductA} setProduct_2_Data={setProductB} />
+    </div>
   )
 }
 

@@ -1,27 +1,28 @@
-'use client'
-// pages/compare.tsx
-
-import React, { useState } from 'react';
-import Head from 'next/head';
+import prisma from '../helper/db';
 import SearchContainer from '@/src/components/search/SearchContainer';
 
-const SearchPage: React.FC = () => {
-    const [productA, setProductA] = useState('');
-    const [productB, setProductB] = useState('');
 
-    const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        // Add logic to handle comparison or fetch data based on productA and productB
-        alert(`Comparing Product A: ${productA} with Product B: ${productB}`);
-    };
+async function getCategories() {
+    const categories = await prisma.productCategories.findMany();
+    return categories;
+}
+
+export default async function SearchPage() {
+
+    const categories_from_db = await getCategories();
+    const categories = categories_from_db.map((category) => {
+        return {
+            name: category.name,
+            slug: category.slug,
+            categoryId: category.id
+        }
+    })
 
     return (
         <>
-            <Head>
-                <title>Product Comparison</title>
-            </Head>
-            <div className='h-screen flex items-center' >
-                <SearchContainer />
+         
+            <div className='h-full flex items-center' >
+                <SearchContainer categories={categories}/>
             </div>
            
             {/* <div className="flex flex-col items-center justify-center min-h-screen py-12">
@@ -56,4 +57,3 @@ const SearchPage: React.FC = () => {
     );
 };
 
-export default SearchPage;

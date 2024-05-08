@@ -7,6 +7,7 @@ import ProductPagination from "@/src/components/categories/ProductsPagination";
 import SearchInput from "@/src/components/search/SearchInput";
 import DualSearchInput from "@/src/components/search/DualSearchInput";
 import CategoryDetailsDisplay from "@/src/components/categories/CategoryDetailsDisplay";
+import { CategoryBreadcrumbs } from "@/src/components/categories/CategoryBreadcrumbs";
 
 export default async function CategoryPage({ params, searchParams }: {
     params: { category_slug : string };
@@ -61,8 +62,12 @@ export default async function CategoryPage({ params, searchParams }: {
     console.log(category?.id)
     return(
         <div>
+            
             <div className="mt-32 flex flex-col items-center justify-center text-black p-4">
                 <h1 className="text-3xl font-bold text-gray-800 mb-8">{category?.name}</h1>
+                <div className="w-full flex justify-start pr-10">
+                    <CategoryBreadcrumbs categoryName={category?.name!} />   
+                </div>
             </div>
             
             {/* <div className="w-full flex mb-8 mt-2">

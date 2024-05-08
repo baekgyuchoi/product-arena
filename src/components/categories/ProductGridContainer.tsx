@@ -82,7 +82,7 @@ const ProductGridContainer: React.FC<ProductGridContainerProps> = (props) => {
     return(
         <>
         <div>
-            <div className="mt-12">
+            <div className="mt-12 lg:px-12">
                
                 <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 p-4">
                     {props.productArray.map(product => {

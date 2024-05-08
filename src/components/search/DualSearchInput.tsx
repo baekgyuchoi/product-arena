@@ -5,10 +5,13 @@ import React, { useEffect, useState } from 'react';
 import { Skeleton } from '../ui/skeleton';
 import ProductGridCard from '../categories/ProductGridCard';
 import { Trash2 } from 'lucide-react';
+import SearchItemButton from './SearchItemButton';
+import Link from 'next/link';
 
 interface DualSearchInputProps {
     // Add any props you need for your component here
-    categoryId: number;
+    categoryId: number | null;
+    categorySlug: string | null;
     product_1: ProductResult | null;
     product_2: ProductResult | null;
     setProduct_1_Data: React.Dispatch<React.SetStateAction<ProductResult | null>>;
@@ -84,7 +87,9 @@ const DualSearchInput: React.FC<DualSearchInputProps> = (props) => {
             <div className="flex flex-col items-center relative w-full">
                 {(props.product_1 !== null) ? (
                     <div className='mx-2 lg:mx-0 my-2 relative'>
-                        <ProductGridCard product={props.product_1} />
+                        <Link href={"/products/" +props.product_1.asin + "?category=" + props.categorySlug}>
+                            <ProductGridCard product={props.product_1} />
+                        </Link>
                         <button onClick={() => deleteButtonClick(1)} className='absolute top-3 right-3 text-black z-20'>
                             <Trash2 />
                         </button>
@@ -108,7 +113,8 @@ const DualSearchInput: React.FC<DualSearchInputProps> = (props) => {
                 onFocus={() => setIsFocused_1(true)}
                 onBlur={() => setIsFocused_1(false)}
                 onChange={(event) => setSearchQuery_1(event.target.value)}
-                
+                disabled={props.categoryId === null}
+                aria-disabled={props.categoryId === null}
                 className="w-4/5 lg:w-full px-5 py-1 sm:px-5 sm:py-3 flex-1 border-gray-300 text-black bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 placeholder:text-xs md:placeholder:text-sm rounded-xl justify-center placeholder:text-black-400"
                 placeholder="Search a product within this category..."
                 />
@@ -119,7 +125,7 @@ const DualSearchInput: React.FC<DualSearchInputProps> = (props) => {
                 {searchQuery_1 === null || searchQuery_1?.length === 0 || !isFocused_1? (
                     <></>
                     ):(
-                    <div className="absolute top-0 mt-1 w-screen lg:w-full p-2 max-h-96 overflow-y-auto z-20">
+                    <div className="absolute top-0 mt-1 w-screen lg:w-full p-2 max-h-96 overflow-y-auto z-20 bg-gradient-to-br from-gray-200 to-blue-800/50">
                         <ul>
                         {productInfoArray_1?.map((productInfo,index) => {
                             console.log(productInfo)
@@ -128,10 +134,10 @@ const DualSearchInput: React.FC<DualSearchInputProps> = (props) => {
                             {/* <PreviewSearchItemButton songInfo={songInfo} key={index}/> */}
                                 
                                 <button 
-                                    className='p-4 bg-gray-200 w-full text-black z-20 truncate hover:text-blue-800'
+                                    className='px-2 py-1 bg-transparent w-full text-black z-20  hover:text-blue-800'
                                     onClick={() => {props.setProduct_1_Data(productInfo)}}
                                     >
-                                    {productInfo.name + "..."}
+                                    <SearchItemButton product_data={productInfo} />
                                 </button>
                             </li>
                             )
@@ -156,7 +162,9 @@ const DualSearchInput: React.FC<DualSearchInputProps> = (props) => {
                 <div className='h-fit'>
                     {(props.product_2 !== null) ? (
                         <div className='mx-2 lg:mx-0 my-2 relative'>
-                            <ProductGridCard product={props.product_2} />
+                            <Link href={"/products/" +props.product_2.asin + "?category=" + props.categorySlug}>
+                                <ProductGridCard product={props.product_2} />
+                            </Link>
                             <button onClick={()=>deleteButtonClick(2)} className='absolute top-3 right-3 text-black z-20'>
                                 <Trash2 />
                             </button>
@@ -178,7 +186,8 @@ const DualSearchInput: React.FC<DualSearchInputProps> = (props) => {
                 onFocus={() => setIsFocused_2(true)}
                 onBlur={() => setIsFocused_2(false)}
                 onChange={(event) => setSearchQuery_2(event.target.value)}
-                
+                disabled={props.categoryId === null}
+                aria-disabled={props.categoryId === null}
                 className="w-4/5 lg:w-full px-5 py-1 sm:px-5 sm:py-3 flex-1 border-gray-300 text-black bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 placeholder:text-xs md:placeholder:text-sm rounded-xl justify-center placeholder:text-black-400"
                 placeholder="Search a product within this category..."
                 />
@@ -189,7 +198,7 @@ const DualSearchInput: React.FC<DualSearchInputProps> = (props) => {
                 {searchQuery_2 === null || searchQuery_2?.length === 0 || !isFocused_2? (
                     <></>
                     ):(
-                    <div className="absolute mt-1 w-full p-2 max-h-96 overflow-y-auto z-20">
+                    <div className="absolute mt-1 w-full p-2 max-h-96 overflow-y-auto z-20 bg-gradient-to-br from-gray-200 to-blue-800/50">
                         <ul>
                         {productInfoArray_2?.map((productInfo,index) => {
                             console.log(productInfo)
@@ -198,10 +207,11 @@ const DualSearchInput: React.FC<DualSearchInputProps> = (props) => {
                             {/* <PreviewSearchItemButton songInfo={songInfo} key={index}/> */}
                                 
                                 <button 
-                                    className='p-4 bg-gray-200 w-full text-black z-20 truncate hover:text-blue-800'
+                                    className='px-2 py-1  w-full text-black z-20  hover:text-blue-800'
                                     onClick={() => {props.setProduct_2_Data(productInfo)}}
                                 >
-                                    {productInfo.name + "..."}
+                                    <SearchItemButton product_data={productInfo} />
+                             
                                 </button>
                             </li>
                             )

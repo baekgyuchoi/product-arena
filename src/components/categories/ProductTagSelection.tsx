@@ -50,14 +50,14 @@ const ProductTagSelection: React.FC<ProductTagSelectionProps> = ({ tags_list, de
         const data = await response.json()
    
         setProductInfoArray(data.productArray)
-        setMaxPageNumber(Math.ceil(data.count/20))
+        setMaxPageNumber(Math.ceil(data.count/12))
       }
 
 
 
     return (
         <>
-            <div className="flex flex-wrap justify-center gap-2">
+            <div className="flex flex-wrap justify-center gap-2 lg:px-8 lg:mt-20">
                 {tags_list.map(tag => (
                     <span
                         key={tag.id}
@@ -78,7 +78,7 @@ const ProductTagSelection: React.FC<ProductTagSelectionProps> = ({ tags_list, de
             <Pagination>
                 <PaginationContent>
                     <PaginationItem>
-                    <PaginationPrevious href="#" />
+                    <PaginationPrevious href="#" onClick={() => {if(page_number > 0) {setPageNumber(page_number-1)}}} />
                     </PaginationItem>
                     {[...Array(max_page_number)].map((page_,page) => {
                        

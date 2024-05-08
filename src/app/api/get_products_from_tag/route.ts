@@ -16,8 +16,8 @@ async function get_products_from_tag(tag_slug: string, page_number: number) {
         orderBy:{
             ratings_total: 'desc'
         },
-        take: 20,
-        skip: (page_number - 1) * 20
+        take: 12,
+        skip: (page_number - 1) * 12
     })
     return products
 }
