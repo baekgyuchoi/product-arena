@@ -13,6 +13,8 @@ import { BoxesBackgroundContainer } from "../components/homepage/BoxesBackground
 import { StickyScrollContainer } from "../components/homepage/StickyScrollContainer";
 import { HeroParallax } from "../components/ui/hero-parallax";
 import { HeroParallaxDemo } from "../components/homepage/HeroParallax";
+import { BentoGridContainer } from "../components/homepage/BentoGridContainer";
+import MobileHero from "../components/homepage/MobileHero";
 
 export default function Home() {
   return (
@@ -24,9 +26,12 @@ export default function Home() {
         </div>
 
         <div className="lg:hidden">
-          {/* <MobileHero /> */}
+          <MobileHero />
         </div>
         
+        <div className="lg:hidden px-1">
+          <BentoGridContainer />
+        </div>
         
       </main>
     </>
