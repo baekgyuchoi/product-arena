@@ -13,6 +13,8 @@ import {
 
 interface SearchCategorySelectProps {
   // Define your props here
+  categorySlug: string | null;
+  setCategorySlug: React.Dispatch<React.SetStateAction<string|null>>;
   categories: {name: string, slug: string, categoryId: number}[];
   categoryId: number | null;
   setCategoryId: React.Dispatch<React.SetStateAction<number|null>>;

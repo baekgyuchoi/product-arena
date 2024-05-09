@@ -25,6 +25,7 @@ interface SearchContainerProps {
 
 const SearchContainer:React.FC<SearchContainerProps> = (props) => {
   const [categoryId, setCategoryId] = useState<number|null>(null); 
+  const [categorySlug, setCategorySlug] = useState<string|null>(null);
   const [productA, setProductA] = useState<ProductResult|null>(null);
   const [productB, setProductB] = useState<ProductResult|null>(null);
   const categories = props.categories;
@@ -33,8 +34,8 @@ const SearchContainer:React.FC<SearchContainerProps> = (props) => {
   console.log("category: " + categoryId)
   return (
     <div className='mt-40 flex flex-col lg:flex-row lg:ml-8 lg:mb-48 items-center justify-center w-full'>
-      <SearchCategorySelect categories={categories} categoryId={categoryId} setCategoryId={setCategoryId} />
-      <DualSearchInput categoryId={categoryId} product_1={productA} product_2={productB} setProduct_1_Data={setProductA} setProduct_2_Data={setProductB} />
+      <SearchCategorySelect categorySlug={categorySlug} setCategorySlug={setCategorySlug} categories={categories} categoryId={categoryId} setCategoryId={setCategoryId} />
+      <DualSearchInput categorySlug={categorySlug} categoryId={categoryId} product_1={productA} product_2={productB} setProduct_1_Data={setProductA} setProduct_2_Data={setProductB} />
     </div>
   )
 }

@@ -41,7 +41,7 @@ const PopoverRelatedProductsBox: React.FC<PopoverRelatedProductsBoxProps> = asyn
                                 <div className="flex flex-col items-center">
                                     <img src={product.imageURL!} alt={product.name} className="object-cover  h-32" />
                                     <h3 className="text-lg text-center">{product.name.split(" ").slice(0, 3).join(" ") + "..."}</h3>
-                                    <ProductRating rating={product.rating} ratings_total={product.ratings_total} size="sm"/>
+                                    <ProductRating rating={product.rating} ratings_total={product.ratings_total} />
                                 </div>
                             </Link>
                         </Card>
