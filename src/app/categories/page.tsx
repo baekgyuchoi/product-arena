@@ -6,11 +6,38 @@ import CategoryItem from '@/src/components/categories/CategoryItem';
 const categories = [
     {
         title: 'Electronics',
-        items: ['Monitors', 'Laptops', 'Cameras', 'VR Headsets']
+        items: [{
+            title: 'Monitors',
+            slug: 'monitors'
+        }, 
+        {
+            title: 'Laptops',
+            slug: 'laptops'
+        }, 
+        {
+            title: 'Cameras',
+            slug: 'cameras'
+        }, 
+        {
+            title: 'VR Headsets',
+            slug: 'vr-headsets'
+        }],
     },
     {
         title: 'Home Improvement',
-        items: ['BBQ Grills', 'Couches', 'Mattresses']
+        items: [{
+            title: 'BBQ Grills',
+            slug: 'bbq-grills'
+        },
+        {
+            title: 'Couches',
+            slug: 'couches'
+        },
+        {
+            title: 'Mattresses',
+            slug: 'mattresses'
+        }],
+      
     },
     // {
     //     title: 'Music',

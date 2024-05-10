@@ -5,7 +5,7 @@ import React from 'react';
 
 type Props = {
     title: string;
-    items: string[];
+    items: {title: string, slug: string}[];
 };
 
 const CategoryItem: React.FC<Props> = ({ title, items }) => {
@@ -15,12 +15,12 @@ const CategoryItem: React.FC<Props> = ({ title, items }) => {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {items.map((item, index) => (
                     <Link 
-                        href={`/categories/${item}`}
+                        href={`/categories/${item.slug}`}
                         key={index}
                         className="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                         
                     >
-                        {item}
+                        {item.title}
                     </Link>
                 ))}
             </div>
