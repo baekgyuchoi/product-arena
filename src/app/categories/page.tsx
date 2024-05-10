@@ -6,16 +6,16 @@ import CategoryItem from '@/src/components/categories/CategoryItem';
 const categories = [
     {
         title: 'Electronics',
-        items: ['Monitors', 'Drones', 'Laptops', 'Cameras', 'VR Headsets']
+        items: ['Monitors', 'Laptops', 'Cameras', 'VR Headsets']
     },
     {
         title: 'Home Improvement',
-        items: ['BBQ Grills', 'Couches']
+        items: ['BBQ Grills', 'Couches', 'Mattresses']
     },
-    {
-        title: 'Music',
-        items: ['Piano/Keyboard', 'Speakers', 'Headphones']
-    }
+    // {
+    //     title: 'Music',
+    //     items: ['Piano/Keyboard', 'Speakers', 'Headphones']
+    // }
 ];
 
 const AllCategoriesPage: React.FC = () => {
