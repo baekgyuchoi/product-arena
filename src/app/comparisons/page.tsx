@@ -5,13 +5,13 @@ import { Card } from "@/src/components/ui/card";
 import { Metadata } from "next";
 
 export async function generateMetadata({
-    params,
+    searchParams,
   }: {
-    params: {p_a: string, p_b: string};
+    searchParams?: { [key: string]: string | null};
   }): Promise<Metadata> {
     
-    const product_asin_1 = params.p_a
-    const product_asin_2 = params.p_b
+    const product_asin_1 = searchParams?.p_a!;
+    const product_asin_2 = searchParams?.p_b!;
     
     const product_1 = await prisma.products.findUnique({
         where: {
