@@ -1,5 +1,4 @@
 
-import Navbar from '@/src/components/Navbar'
 import { Viewport } from 'next'
 // import NavBar from '../components/NavBar'
 

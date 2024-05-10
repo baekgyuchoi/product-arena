@@ -19,7 +19,7 @@ const ProductVersusIcon: React.FC<ProductVersusIconProps> = (props) => {
     return (
         <div className='w-full flex justify-between '>
             <div className='flex items-center justify-center '>
-                <Image src="/vs_icon.png" alt="Versus Icon" width={250} height={250} className='w-20 h-20' />
+                <Image src="/VS_icon.png" alt="Versus Icon" width={250} height={250} className='w-20 h-20' />
             </div>
             <div className='w-2/3 flex flex-col items-center justify-center'>
                 <Popover>

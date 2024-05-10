@@ -2,6 +2,48 @@ import ComparisonDetailsDisplay from "@/src/components/comparison/ComparisonDeta
 import prisma from "../helper/db";
 import { ProductResult } from "@/src/lib/validators/ProductResult";
 import { Card } from "@/src/components/ui/card";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+    params,
+  }: {
+    params: {p_a: string, p_b: string};
+  }): Promise<Metadata> {
+    
+    const product_asin_1 = params.p_a
+    const product_asin_2 = params.p_b
+    
+    const product_1 = await prisma.products.findUnique({
+        where: {
+            asin: product_asin_1
+        },
+        
+    })
+
+    const product_2 = await prisma.products.findUnique({
+        where: {
+            asin: product_asin_2
+        },
+     
+    })
+
+    const comparison = await prisma.productComparison.findUnique({
+        where: {
+            asinconcat: `${product_asin_1}&${product_asin_2}`
+        }
+    })
+    
+    const comparison_json = JSON.parse(comparison?.content!)
+
+
+    return {
+      title: `${product_1?.name} vs ${product_2?.name} Comparison`,
+      description: `${comparison_json.comparison.content}`,
+      alternates: {
+        canonical: '/'
+      }
+    }
+};
 
 async function getProductData(asin: string) {
     const product = await prisma.products.findUnique({

@@ -7,8 +7,8 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
-  title: "Product Arena | Product Comparisons Based on User Reviews",
-  description: "Gain insights into the best products based on user reviews and specifications.",
+  title: "Product Arena | From Thousands of Reviews to One Simple Summary",
+  description: "We leverage advanced AI to distill thousands of Amazon reviews into concise, insightful summaries. Make confident purchasing decisions by comparing products side by side to see which fits your needs based on real user feedback.",
 };
 
 export default function RootLayout({
