@@ -78,7 +78,7 @@ const ComparisonTabsContent: React.FC<ComparisonTabsContentProps> = async (props
                     <ProductReviewArticleContainer asin={productData.asin} />
                 </div>
                 <div>
-                    <RelatedProductsBox related_products={related_products} category_slug={category_name}/>
+                    <RelatedProductsBox related_products={related_products} />
                 </div>
 
               </div>
