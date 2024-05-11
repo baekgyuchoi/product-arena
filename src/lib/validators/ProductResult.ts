@@ -55,7 +55,7 @@ export const ProductResultSchema = z.object({
         createdAt: z.date(),
         updatedAt: z.date()
     
-    })
+    }).optional()
     
     
 

@@ -17,7 +17,7 @@ const ComparisonArticleContent: React.FC<ComparisonArticleContentProps> = ({ com
     const labels = comparison_content_json.comparison.sections.map((section: any) => section.title)
     const product_1_scores = comparison_content_json.comparison.sections.map((section: any) => section.product_1_score)
     const product_2_scores = comparison_content_json.comparison.sections.map((section: any) => section.product_2_score)
-   
+    
 
     return (
         <>

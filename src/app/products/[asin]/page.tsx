@@ -25,11 +25,18 @@ export async function generateMetadata({
         }
     })
 
-    const json_review = JSON.parse(product?.article?.review_description as string)
-    console.log(json_review)
+    const json_review = JSON.parse(JSON.parse(product?.article?.review_description as string))
+
+    let review_description = "Review analysis of " + product?.name
+
+    if (json_review.positive_review_analysis && json_review.positive_review_analysis.length > 0 && json_review.positive_review_analysis[0].section_content) {
+        review_description = json_review.positive_review_analysis[0].section_content
+    }
+
+   
     return {
       title: `Review of ${product?.name}`,
-      description: `${json_review.positive_review_analysis[0].section_content}`,
+      description: `${review_description}`,
       alternates: {
         canonical: '/'
       }
@@ -37,12 +44,11 @@ export async function generateMetadata({
 };
 
 
-export default async function ProductPage({ params, searchParams }: {
+export default async function ProductPage({ params }: {
     params: { asin : string };
-    searchParams?: { [key: string]: string | null};
     
     }) {
-        const categorySlug = searchParams?.category;
+        
 
         const product = await prisma.products.findUnique({
             where: {
@@ -59,7 +65,7 @@ export default async function ProductPage({ params, searchParams }: {
         const product_data = product as ProductResult
         return(
         <>
-            <ProductDetailsDisplay product_data={product_data} categorySlug={categorySlug!}/>
+            <ProductDetailsDisplay product_data={product_data} />
         </>
         )
     }

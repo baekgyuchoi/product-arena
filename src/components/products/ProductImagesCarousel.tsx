@@ -28,14 +28,14 @@ const ProductImagesCarousel: React.FC<ProductImagesCarouselProps> = (props) => {
     //     })}
     //   </div>
     return (
-        <Carousel className="w-full max-w-lg">
+        <Carousel className="w-full lg:w-4/5   bg-white">
             <CarouselContent>
                 {props.images.map((url, index) => {
                     if (!url) return null;
                     return(
                         <CarouselItem key={index} className='flex items-center justify-center'>
                             
-                            <Card className='p-1 bg-white rounded-md w-full h-64 flex items-center justify center'>
+                            <Card className='p-1 bg-white rounded-md w-full h-64 lg:h-96 flex items-center justify center'>
                                 <Image src={url!} alt={`Product Image ${index + 1}`} width={500} height={500} className='mx-auto object-scale-down h-full' />
                                 {/* <CardContent className="flex aspect-square items-center justify-center p-6">
                                 <span className="text-4xl font-semibold">{index + 1}</span>

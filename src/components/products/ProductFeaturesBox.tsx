@@ -6,7 +6,7 @@ interface ProductFeaturesBoxProps {
 
 const ProductFeaturesBox: React.FC<ProductFeaturesBoxProps> = ({ features }) => {
     return (
-        <section className="my-6 lg:p-4 bg-white rounded-lg">
+        <section className="my-6 lg:p-4 rounded-lg">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Features:</h2>
             <ul className="list-inside list-disc space-y-2">
                 {features.map((feature, index) => (

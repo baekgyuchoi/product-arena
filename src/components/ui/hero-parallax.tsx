@@ -108,7 +108,7 @@ export const Header = () => {
         <span className="italic text-2xl md:text-7xl">Product <span className="text-blue-700">Arena</span>: </span> <br /> From Thousands of Reviews to One Simple Summary
       </h1>
       <p className="max-w-2xl text-base md:text-xl mt-8 dark:text-neutral-200">
-        We leverage advanced AI to distill thousands of Amazon reviews into concise, insightful summaries. Make confident purchasing decisions by comparing products side by side to see which fits your needs based on real user feedback. 
+        We distill thousands of Amazon reviews into concise, insightful summaries. Search to get started. 
       </p>
     </div>
   );

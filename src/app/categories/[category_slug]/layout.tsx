@@ -3,7 +3,7 @@ import { GeistSans } from "geist/font/sans";
 
 import { cn } from "../../../lib/utils";
 import "../../globals.css";
-import Navbar from "../../../components/Navbar";
+
 
 export const metadata: Metadata = {
   title: "Product Arena | Product Comparisons Based on User Reviews",

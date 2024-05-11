@@ -29,7 +29,7 @@ const ProductSpecificationsTable: React.FC<ProductSpecificationsTableProps> = (p
     }
  
     return (
-      <section className="mt-4 lg:px-16 mb-12">
+      <section className="mt-4  mb-12">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
             <AccordionTrigger>

@@ -2,20 +2,20 @@ import { ProductResult } from '@/src/lib/validators/ProductResult';
 import React from 'react';
 import ProductRating from '../products/ProductRating';
 
-interface SearchItemButtonProps {
+interface ProductComparisonSearchItemButtonProps {
     // Define the props for your component here
     product_data: ProductResult
 }
 
-const SearchItemButton: React.FC<SearchItemButtonProps> = (props) => {
+const ProductComparisonSearchItemButton: React.FC<ProductComparisonSearchItemButtonProps> = (props) => {
     // Implement your component logic here
     const productData = props.product_data;
     return (
         // JSX code for your component goes here
-        <div className='rounded-md flex items-center justify-center px-3 py-1 gap-1 bg-white'>
+        <div className='rounded-md flex items-center justify-center px-3 py-1 gap-1 bg-blue-900'>
             {/* Add your component content here */}
-            <img src={productData.imageURL} className='w-28 h-28 object-contain' />
-            <div className='ml-2 flex flex-col items-center  w-full justify-center whitespace-wrap '>
+            <img src={productData.imageURL} className='w-20 h-20 object-contain' />
+            <div className='flex flex-col items-center  w-full justify-center whitespace-wrap '>
                 <span className='italic'>{productData.name}</span>
                 <div className='flex items-center justify-center gap-4'>
                     
@@ -28,4 +28,4 @@ const SearchItemButton: React.FC<SearchItemButtonProps> = (props) => {
     );
 };
 
-export default SearchItemButton;
+export default ProductComparisonSearchItemButton;

@@ -3,7 +3,7 @@ import { GeistSans } from "geist/font/sans";
 
 import { cn } from "../lib/utils";
 import "./globals.css";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/nav_bar/Navbar";
 import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
@@ -24,7 +24,7 @@ export default function RootLayout({
           GeistSans.className,
         )}
       >
-        <Navbar />
+        {/* <Navbar /> */}
         {children}
         <Footer />
       </body>

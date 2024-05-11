@@ -75,16 +75,14 @@ const ComparisonDetailsDisplay: React.FC<ComparisonDetailsDisplayProps> = (props
   return (
     <>
     <main className="">
-      <div className='mt-20 flex flex-col items-center md:px-4 py-8'>
+      <div className='mt-8 flex flex-col items-center md:px-4 py-8'>
         <div className='flex w-full flex-1 flex-col items-center pl-0 pr-0 '>
             <Card className=" pb-16 text-black  sm:w-3/4 w-full mb-0.5 flex-1 rounded-t-3xl from-primary to-primary/80 shadow-xl border-blue-800 border-2  sm:mb-8 sm:flex-initial sm:rounded-b-3xl">
               <CardHeader className="mt-12 sm:mt-18 mx-6 flex flex-col items-center ">
-                <div className='w-full mb-8'>
-                  <ComparisonBreadcrumbs categoryId={productData_1.categoryId} asin_1={productData_1.asin} asin_2={productData_2.asin} />
-                </div>
+               
               
                 <div className='w-full flex mb-8 items-center justify-center'>
-                  <ComparisonIntroBox brand_1={productDetails_1.brand} name_1={productData_1.name!} rating_1={productData_1.rating} ratings_total_1={productData_1.ratings_total} base_image_1={productData_1.imageURL!} aff_link_1={productData_1.aff_link} price_1={productData_1.price} brand_2={productDetails_2.brand} name_2={productData_2.name!} rating_2={productData_2.rating} ratings_total_2={productData_2.ratings_total} base_image_2={productData_2.imageURL!} aff_link_2={productData_2.aff_link} price_2={productData_2.price} />
+                  <ComparisonIntroBox asin_1={productData_1.asin} brand_1={productDetails_1.brand} name_1={productData_1.name!} rating_1={productData_1.rating} ratings_total_1={productData_1.ratings_total} base_image_1={productData_1.imageURL!} aff_link_1={productData_1.aff_link} price_1={productData_1.price} asin_2={productData_2.asin} brand_2={productDetails_2.brand} name_2={productData_2.name!} rating_2={productData_2.rating} ratings_total_2={productData_2.ratings_total} base_image_2={productData_2.imageURL!} aff_link_2={productData_2.aff_link} price_2={productData_2.price} />
                 </div>
                   
                   

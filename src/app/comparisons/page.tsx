@@ -26,22 +26,32 @@ export async function generateMetadata({
         },
      
     })
-
-    const comparison = await prisma.productComparison.findUnique({
-        where: {
-            asinconcat: `${product_asin_1}&${product_asin_2}`
-        }
-    })
+    try{
+        const comparison = await prisma.productComparison.findUnique({
+            where: {
+                asinconcat: `${product_asin_1}&${product_asin_2}`
+            }
+        })
+        
+        const comparison_json = JSON.parse(comparison?.content!)
     
-    const comparison_json = JSON.parse(comparison?.content!)
-
-
-    return {
-      title: `${product_1?.name} vs ${product_2?.name} Comparison`,
-      description: `${comparison_json.comparison.content}`,
-      alternates: {
-        canonical: '/'
-      }
+    
+        return {
+          title: `${product_1?.name} vs ${product_2?.name} Comparison`,
+          description: `${comparison_json.comparison.content}`,
+          alternates: {
+            canonical: '/'
+          }
+        }
+    }
+    catch{
+        return {
+            title: `${product_1?.name} vs ${product_2?.name} Comparison`,
+            description: `Compare ${product_1?.name} and ${product_2?.name} to see which one is better based on thousands of user reviews`,
+            alternates: {
+              canonical: '/'
+            }
+          }
     }
 };
 

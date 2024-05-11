@@ -97,13 +97,7 @@ const DualSearchInput: React.FC<DualSearchInputProps> = (props) => {
                 ):(
                     
                     <div className="flex flex-col my-2 space-y-3 items-center w-full h-[370px] justify-center ">
-                        <Skeleton className="h-[175px] w-[350px] rounded-xl" />
-                        <div className="space-y-2">
-                            <Skeleton className="h-6 w-[350px]" />
-                            <Skeleton className="h-6 w-[300px]" />
-                            <Skeleton className="h-4 w-[300px]" />
-                            <Skeleton className="h-4 w-[300px]" />
-                        </div>
+                        
                     </div>
                 
                 )}
@@ -171,13 +165,7 @@ const DualSearchInput: React.FC<DualSearchInputProps> = (props) => {
                         </div>
                     ):(
                         <div className="flex my-2 flex-col space-y-3 items-center w-full h-[370px] justify-center ">
-                            <Skeleton className="h-[175px] w-[350px] rounded-xl" />
-                            <div className="space-y-2">
-                                <Skeleton className="h-6 w-[350px]" />
-                                <Skeleton className="h-6 w-[300px]" />
-                                <Skeleton className="h-4 w-[300px]" />
-                                <Skeleton className="h-4 w-[300px]" />
-                            </div>
+                            
                         </div>  
                     )}
                 </div>

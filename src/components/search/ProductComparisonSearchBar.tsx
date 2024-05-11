@@ -5,12 +5,14 @@ import React, { useEffect, useState } from 'react';
 import SearchItemButton from './SearchItemButton';
 import Link from 'next/link';
 
-interface SearchInputProps {
+
+interface ProductComparisonSearchBarProps {
     // Add any props you need for your component here
-    categoryId?: number;
+    categoryId: number;
+    productAsin: string;
 }
 
-const SearchInput: React.FC<SearchInputProps> = (props) => {
+const ProductComparisonSearchBar: React.FC<ProductComparisonSearchBarProps> = (props) => {
     const [searchQuery, setSearchQuery] = useState<string | null>(null);
     const [isFocused, setIsFocused] = useState<boolean>(false);
     // const [categoryId, setCategoryId] = useState<number>(0);
@@ -29,7 +31,7 @@ const SearchInput: React.FC<SearchInputProps> = (props) => {
     
     const fetchData =  async () => {
    
-        const response = await fetch(`/api/search_product?q=${searchQuery}`,{
+        const response = await fetch(`/api/search_product?q=${searchQuery}&cat=${props.categoryId}`,{
             method: 'GET',
             headers: {
             'Content-Type': 'application/json'
@@ -52,14 +54,14 @@ const SearchInput: React.FC<SearchInputProps> = (props) => {
     
     return (
         <div className="flex flex-col justify-center w-full rounded p-2 transition ">
-            <div className="relative w-full">
+            <div className=" w-full ">
                 <input
                 value={searchQuery || ""}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
                 onChange={(event) => setSearchQuery(event.target.value)}
                 onKeyDown={(event) => {if (event.key === 'Enter') {submitSearch(searchQuery)}}    }
-                className="w-full px-5 py-1 sm:px-5 sm:py-3 flex-1 border-gray-300 text-black bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 placeholder:text-xs md:placeholder:text-sm rounded-full justify-center placeholder:text-black-400"
+                className="w-full mx-auto px-5 lg:px-12 py-2 sm:px-5 sm:py-3 flex-1 border-gray-300 text-black bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 placeholder:text-xs md:placeholder:text-sm rounded-full justify-center placeholder:text-black-400"
                 placeholder="Search a product within this category..."
                 />
                 <div 
@@ -69,15 +71,15 @@ const SearchInput: React.FC<SearchInputProps> = (props) => {
                 {searchQuery === null || searchQuery?.length === 0 || !isFocused? (
                     <></>
                     ):(
-                    <div className="absolute bg-transparent mt-1 w-full p-2 max-h-96 overflow-y-auto z-20">
-                        <ul>
+                    <div className="absolute left-0 mt-1 w-full lg:px-36 p-2 max-h-[600px] overflow-y-auto z-20 ">
+                        <ul className='bg-gradient-to-br from-gray-200 to-blue-800/50'>
                         {productInfoArray?.map((productInfo,index) => {
                             console.log(productInfo)
                             return(
                             <li key={index}>
                             {/* <PreviewSearchItemButton songInfo={songInfo} key={index}/> */}
-                                <Link href={'/products/' + productInfo.asin}>
-                                <div className='px-2 py-1 bg-transparent w-full text-black z-20  hover:text-blue-800'>
+                                <Link href={'/comparisons?p_a='+props.productAsin + '&p_b=' + productInfo.asin}>
+                                <div className='lg:px-2 py-1 bg-transparent w-full text-black z-20  hover:text-blue-800'>
                                     <SearchItemButton product_data={productInfo} />
                                 </div>
                                 </Link>
@@ -96,4 +98,4 @@ const SearchInput: React.FC<SearchInputProps> = (props) => {
     );
 };
 
-export default SearchInput;
+export default ProductComparisonSearchBar;

@@ -1,7 +1,8 @@
 
-import Navbar from '@/src/components/Navbar'
+
+import Navbar from '@/src/components/nav_bar/Navbar'
 import { Viewport } from 'next'
-// import NavBar from '../components/NavBar'
+
 
 
 
@@ -17,7 +18,7 @@ export default function Layout({
 }) {
   return (
     <div>
-
+      <Navbar />
         {children}
        
     </div>

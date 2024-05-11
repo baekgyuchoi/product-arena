@@ -1,36 +1,36 @@
 import prisma from "../../helper/db"
 
-async function get_products_from_tag(tag_slug: string, page_number: number) {
+async function get_products_from_search(search_query: string, page_number: number) {
     const products = await prisma.products.findMany({
         where: {
-            tags: {
-                some: {
-                    slug: tag_slug
-                }
+            name:{
+                search: search_query
             }
         },
         include: {
-            product_rating: true,
-            product_details: true
+            
         },
         orderBy:{
-            ratings_total: 'desc'
+            _relevance: {
+                fields: ['name'],
+                search: search_query,
+                sort: 'desc'
+            }
         },
-        take: 12,
-        skip: (page_number - 1) * 12
+        take: 16,
+        skip: (page_number - 1) * 16
     })
     return products
 }
 
-async function get_products_from_tag_count(tag_slug: string) {
+async function get_products_from_search_count(search_query: string) {
     const count = await prisma.products.count({
         where: {
-            tags: {
-                some: {
-                    slug: tag_slug
-                }
+            name:{
+                search: search_query
             }
-        }
+        },
+        
     })
     return count
 
@@ -40,15 +40,15 @@ async function get_products_from_tag_count(tag_slug: string) {
 export async function GET(request: Request) {
     const url = new URL(request.url)
     const queryParam = url.searchParams
+    
 
-
-    const tag_slug = (queryParam.get('tag_slug') || "")
+    const search_query = (queryParam.get('search') || "")
     const page_number = parseInt(queryParam.get('page_number') || "1")
-
+    console.log(search_query, page_number)
     try{
 
-        const products = await get_products_from_tag(tag_slug, page_number)
-        const count = await get_products_from_tag_count(tag_slug)
+        const products = await get_products_from_search(search_query, page_number)
+        const count = await get_products_from_search_count(search_query)
         return new Response(JSON.stringify({productArray: products, count: count}), {status: 200})
 
     }catch(err){

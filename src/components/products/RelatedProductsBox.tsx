@@ -9,7 +9,6 @@ import { ProductResult } from '@/src/lib/validators/ProductResult';
 
 interface RelatedProductsBoxProps {
     related_products: string[],
-    category_slug: string
 }
 
 async function getRelatedProducts(asin_list: string[]) {

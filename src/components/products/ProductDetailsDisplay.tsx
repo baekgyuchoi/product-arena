@@ -23,7 +23,7 @@ type Specification = {
 interface ProductDetailsDisplayProps {
     // Define the props here
     product_data: ProductResult;
-    categorySlug: string;
+
 }
 
 const ProductDetailsDisplay: React.FC<ProductDetailsDisplayProps> = (props) => {
@@ -59,26 +59,31 @@ const ProductDetailsDisplay: React.FC<ProductDetailsDisplayProps> = (props) => {
   return (
     <>
     <main className="">
-      <div className='mt-20 flex flex-col items-center md:px-4 py-8'>
+      <div className='mt-8 flex flex-col items-center md:px-4 py-8'>
         <div className='flex w-full flex-1 flex-col items-center '>
-            <Card className=" pb-16 text-black  sm:w-3/4 w-full mb-0.5 flex-1 rounded-t-3xl from-primary to-primary/80 shadow-xl border-blue-800 border-2  sm:mb-8 sm:flex-initial sm:rounded-b-3xl">
-            <CardHeader className="mt-12 sm:mt-18 mx-0 sm:mx-6 flex flex-col  items-center ">
-              <div className='w-full lg:mb-8 lg:px-8'>
-                <ProductBreadcrumbs asin={productData.asin} categoryName={props.categorySlug} />
+            <Card className="bg-gray-50 pb-16 text-black  sm:w-3/4 w-full mb-0.5 flex-1 rounded-t-3xl from-primary to-primary/80 shadow-xl border-blue-800  border-t-2 lg:border-2  sm:mb-8 sm:flex-initial sm:rounded-b-3xl">
+            <CardHeader className="mt-12 sm:mt-18 mx-0 sm:mx-6 flex flex-col items-center ">
+              <div className='w-full  lg:px-8'>
+          
                 <ProductIntroBox brand={productDetails.brand} name={productData.name} rating={productData.rating} ratings_total={productData.ratings_total} />    
               </div>
-              <div className='flex flex-col lg:flex-row items-center w-full'>
-                <div className="w-4/5 lg:w-3/5 flex flex-col items-center justify-center mb-8 md:mb-0 md:mr-8 ">
+              <div className='w-full flex items-start mb-2 lg:px-8'>
+                <ProductRating rating={productData.rating} ratings_total={productData.ratings_total} size={"large"} />
+              </div>
+              
+              <div className='flex flex-col  items-center w-full'>
+                <div className="w-4/5 flex flex-col items-center justify-center mb-8 md:mb-0 md:mr-8 ">
                   <ProductImagesCarousel images={images} base_image={base_image as string} />
                 </div>
-                <div className=' h-fit '>
-                  <ProductVersusIcon related_products={related_products} asin={productData.asin}/>
+                <div className='px-8 w-full flex justify-center items-center mt-2 mb-4'>
+
+                  <ProductBuyButton aff_link={productData.aff_link} price={productData.price} />
+                </div>
+                <div className=' h-fit w-screen'>
+                  <ProductVersusIcon category_id={productData.categoryId} related_products={related_products} asin={productData.asin}/>
                 </div>
               </div>
-              <div className='px-8 w-full flex justify-between flex-col lg:flex-row'>
-                <ProductRating rating={productData.rating} ratings_total={productData.ratings_total} size={"large"} />
-                <ProductBuyButton aff_link={productData.aff_link} price={productData.price} />
-              </div>
+             
               <div className='w-full pt-4'>
                 <Separator />
               </div>
@@ -96,7 +101,7 @@ const ProductDetailsDisplay: React.FC<ProductDetailsDisplayProps> = (props) => {
                   <ProductReviewArticleContainer asin={productData.asin} />
                 </div>
                 <div>
-                  <RelatedProductsBox related_products={related_products} category_slug={props.categorySlug} />
+                  <RelatedProductsBox related_products={related_products}  />
                 </div>
 
               </div>

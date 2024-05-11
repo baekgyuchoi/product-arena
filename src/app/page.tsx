@@ -1,12 +1,4 @@
-import MaxWidthWrapper from "../components/MaxWidthWrapper";
-import { buttonVariants } from "../components/ui/button";
-import { Card, CardDescription, CardTitle } from "../components/ui/card";
 
-import Link from "next/link";
-import Image from "next/image";
-import { cn } from "../lib/utils";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 
 import { Boxes } from "../components/ui/background-boxes";
 import { BoxesBackgroundContainer } from "../components/homepage/BoxesBackgroundContainer";
@@ -15,21 +7,23 @@ import { HeroParallax } from "../components/ui/hero-parallax";
 import { HeroParallaxDemo } from "../components/homepage/HeroParallax";
 import { BentoGridContainer } from "../components/homepage/BentoGridContainer";
 import MobileHero from "../components/homepage/MobileHero";
+import SearchInput from "../components/search/SearchInput";
 
 export default function Home() {
   return (
     <>
-      <main className="flex flex-col items-center justify-center ">
+      <main className="w-full flex flex-col items-center justify-center ">
        
-        <div className="hidden lg:block">
+        <div className="hidden ">
           <HeroParallaxDemo />
         </div>
 
-        <div className="lg:hidden">
+        <div className="w-full">
           <MobileHero />
         </div>
+
         
-        <div className="lg:hidden px-1">
+        <div className="px-1">
           <BentoGridContainer />
         </div>
         

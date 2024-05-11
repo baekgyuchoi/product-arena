@@ -130,7 +130,7 @@ const ComparisonArticleContainer: React.FC<ComparisonArticleContainerProps> = as
 
     if (!comparison_article) {
         await saveComparisonPage(props.asin_1, props.asin_2);
-        const comparison_generation = await generateComparisonArticle(props.asin_1 + "&" + props.asin_2, props.product_data_1.name, props.product_data_2.name, props.product_data_1.price, props.product_data_2.price, props.product_data_1.article, props.product_data_2.article);
+        const comparison_generation = await generateComparisonArticle(props.asin_1 + "&" + props.asin_2, props.product_data_1.name, props.product_data_2.name, props.product_data_1.price, props.product_data_2.price, props.product_data_1.article!, props.product_data_2.article!);
         if(comparison_generation !== null && comparison_generation !== undefined) {
             await saveComparisonGeneration(props.asin_1 + "&" + props.asin_2, comparison_generation);
         }
@@ -148,7 +148,7 @@ const ComparisonArticleContainer: React.FC<ComparisonArticleContainerProps> = as
     
     if (!comparison_article?.content) {
         if (diff > 100000) {
-            const comparison_generation = await generateComparisonArticle(props.asin_1 + "&" + props.asin_2, props.product_data_1.name, props.product_data_2.name, props.product_data_1.price, props.product_data_2.price, props.product_data_1.article, props.product_data_2.article);
+            const comparison_generation = await generateComparisonArticle(props.asin_1 + "&" + props.asin_2, props.product_data_1.name, props.product_data_2.name, props.product_data_1.price, props.product_data_2.price, props.product_data_1.article!, props.product_data_2.article!);
             if(comparison_generation !== null && comparison_generation !== undefined) {
                 await saveComparisonGeneration(props.asin_1 + "&" + props.asin_2, comparison_generation);
             }
