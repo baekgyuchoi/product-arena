@@ -61,8 +61,8 @@ const ProductComparisonSearchBar: React.FC<ProductComparisonSearchBarProps> = (p
                 onBlur={() => setIsFocused(false)}
                 onChange={(event) => setSearchQuery(event.target.value)}
                 onKeyDown={(event) => {if (event.key === 'Enter') {submitSearch(searchQuery)}}    }
-                className="w-full mx-auto px-5 lg:px-12 py-2 sm:px-5 sm:py-3 flex-1 border-gray-300 text-black bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 placeholder:text-xs md:placeholder:text-sm rounded-full justify-center placeholder:text-black-400"
-                placeholder="Search a product within this category..."
+                className="w-full mx-auto px-5 lg:px-12 py-2 sm:px-5 sm:py-3 flex-1 border-blue-900 border-b-2 border text-black bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 placeholder:text-xs md:placeholder:text-sm rounded-full justify-center placeholder:text-black-400"
+                placeholder="Search a second product to create a comparison..."
                 />
                 <div 
                 className="bg-transparent"

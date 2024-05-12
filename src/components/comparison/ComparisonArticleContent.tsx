@@ -10,7 +10,7 @@ interface ComparisonArticleContentProps {
 
 const ComparisonArticleContent: React.FC<ComparisonArticleContentProps> = ({ comparison_content }) => {
     const comparison_content_json = JSON.parse(comparison_content)
-    console.log(comparison_content_json)
+   
     const comparison_content_sections = comparison_content_json.comparison.sections
     const comparison_summary = comparison_content_json.comparison.content
 
