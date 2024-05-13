@@ -1,0 +1,8 @@
+User-Agent: *
+Allow: /
+Disallow: /private/
+Disallow: /search/
+
+
+
+Sitemap: https://www.productarena.org/sitemaps/1.xml
