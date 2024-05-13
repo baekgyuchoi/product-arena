@@ -13,8 +13,8 @@ export function BentoGridContainer() {
             <BentoGridItem
             title={item.title}
             //   description={item.description}
-            header={  <div className="relative overflow-hidden w-full min-h-[6rem] max-h-20">
-                            <img src={item.thumbnail} className="w-full min-h-20 object-cover object-top scale-125" />
+            header={  <div className="relative overflow-hidden w-full min-h-[6rem] max-h-40">
+                            <img src={item.thumbnail} className="w-full min-h-20 object-contain h-full object-cente scale-125" />
                         </div>
         }
             icon={<Scale className="h-4 w-4 text-neutral-500" />}

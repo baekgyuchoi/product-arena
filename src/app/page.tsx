@@ -18,7 +18,7 @@ export default function Home() {
           <HeroParallaxDemo />
         </div>
 
-        <div className="w-full">
+        <div className="w-full mb-36">
           <MobileHero />
         </div>
 
