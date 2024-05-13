@@ -5,6 +5,7 @@ import { cn } from "../lib/utils";
 import "./globals.css";
 import Navbar from "../components/nav_bar/Navbar";
 import Footer from "../components/Footer";
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: "Product Arena | From Thousands of Reviews to One Simple Summary",
@@ -26,6 +27,7 @@ export default function RootLayout({
       >
         {/* <Navbar /> */}
         {children}
+        <Analytics />
         <Footer />
       </body>
     </html>
