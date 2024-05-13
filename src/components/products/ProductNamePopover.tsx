@@ -21,8 +21,8 @@ const ProductNamePopover: React.FC<ProductNamePopoverProps> = (props) => {
                 <PopoverTrigger>
                     <span className=" text-center italic">{product_name.slice(0,50) + "..."}</span>
                 </PopoverTrigger>
-                <PopoverContent className=''>
-                    <span className="text-lg ">{product_name}</span>
+                <PopoverContent className='w-screen'>
+                    <span className="text-lg w-screen lg:w-full ">{product_name}</span>
                 </PopoverContent>
             </Popover>
         </div>
