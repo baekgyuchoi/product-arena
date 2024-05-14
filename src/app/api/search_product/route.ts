@@ -2,32 +2,47 @@ import { ProductResult } from "@/src/lib/validators/ProductResult"
 import prisma from "../../helper/db"
 
 async function get_products_from_search_query(search_query: string, page_number: number) {
-    
-    // const products = await prisma.products.findMany({
-    //     where: {
-    //         name: {
-    //             search: search_query
-    //         }
-    //     },
-    //     orderBy:{
-    //         _relevance: {
-    //             fields: ['name'],
-    //             search: search_query,
-    //             sort: 'desc'
-    //         }
-    //     },
-    //     take: 20,
-    //     skip: (page_number - 1) * 20,
-    //     include: {
-           
-    //     }
+    console.log(search_query)
+    const products = await prisma.products.findMany({
+        where: {
+          
+                
+            
+                // product_details: {
+                //     keywords_list: {
+                //         search: search_query
+                //     }
+                // }
+            
+                
+                    name: {
+                        search: '+' + search_query.split(' ').join(' +')
+                    }
+                
+         
+        },
+        orderBy:[
+            {
+                _relevance: {
+                    fields: ['name'],
+                    search: search_query,
+                    sort: 'desc'
+                }
+            },
+
+        ],
+        take: 20,
+        skip: (page_number - 1) * 20,
+        include: {
+           product_details:true
+        }
         
-    // })
+    })
     // const products = await prisma.$queryRaw`SELECT * FROM Products WHERE MATCH(name) AGAINST(${search_query} IN NATURAL LANGUAGE MODE) LIMIT 20 OFFSET ${(page_number-1) * 20};`
 
-    const products = await prisma.$queryRaw`SELECT *, MATCH(name) AGAINST(${search_query} IN NATURAL LANGUAGE MODE) AS relevance FROM Products WHERE MATCH(name) AGAINST(${search_query} IN NATURAL LANGUAGE MODE) ORDER BY relevance DESC LIMIT 20 OFFSET ${(page_number - 1) * 20}`;
-
- 
+    // // const products = await prisma.$queryRaw`SELECT *, MATCH(name) AGAINST(${search_query} IN NATURAL LANGUAGE MODE) AS relevance FROM Products WHERE MATCH(name) AGAINST(${search_query} IN NATURAL LANGUAGE MODE) ORDER BY relevance DESC LIMIT 20 OFFSET ${(page_number - 1) * 20}`;
+    // console.log(products.map((product)=>{ return product.keywords_list }) )
+    console.log(products.map((product)=>{ return product.name, product.product_details?.keywords_list }))
     
     return products as ProductResult[]
 
