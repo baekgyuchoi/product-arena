@@ -37,13 +37,36 @@ async function getComparisonsCount() {
 }
 
 async function getProductsCount() {
-    const count = await prisma.products.count()
+    const count = await prisma.products.count({
+        where: {
+            product_details: {
+                isNot: null
+            },
+            product_rating: {
+                isNot: null
+            },
+            article: {
+                isNot: null
+            }
+        }
+    })
     return count
 }
 
 
 async function fetchProducts(pageNumber: number) {
     const products_arr = await prisma.products.findMany({
+        where: {
+            product_details: {
+                isNot: null
+            },
+            product_rating: {
+                isNot: null
+            },
+            article: {
+                isNot: null
+            }
+        },
         take: 10000,
         skip: (pageNumber) * 10000,
         orderBy: {

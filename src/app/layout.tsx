@@ -9,7 +9,7 @@ import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: "Product Arena | From Thousands of Reviews to One Simple Summary",
-  description: "We leverage advanced AI to distill thousands of Amazon reviews into concise, insightful summaries. Make confident purchasing decisions by comparing products side by side to see which fits your needs based on real user feedback.",
+  description: "We distill thousands of Amazon reviews into concise, insightful articles. Make confident purchasing decisions by comparing products side by side to see which fits your needs based on real user feedback.",
 };
 
 export default function RootLayout({

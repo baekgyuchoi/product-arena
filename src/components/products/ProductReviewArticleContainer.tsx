@@ -53,7 +53,7 @@ const ProductReviewArticleContainer: React.FC<ProductReviewArticleContainerProps
     console.log(positive_reviews)
     return (
         <section className=''>
-            <h2 className="text-2xl font-bold">Product Review Analysis</h2>
+            <h2 className="text-2xl font-black text-gray-800"> <span>Product </span>Review Analysis</h2>
             <div className="my-4">
                 <Accordion type="multiple" className="w-full lg:px-8" defaultValue={["item-1","item-2"]}>
                     {(positive_reviews!==null) && (positive_reviews!==undefined) && (positive_reviews.length > 0)? (

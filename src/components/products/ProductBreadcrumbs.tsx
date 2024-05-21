@@ -25,7 +25,16 @@ interface ProductBreadcrumbsProps {
 async function getCategoryName(asin: string) {
     const response = await prisma.products.findUnique({
         where: {
-            asin: asin
+            asin: asin,
+            product_details: {
+                isNot: null
+            },
+            product_rating: {
+                isNot: null
+            },
+            article: {
+                isNot: null
+            }
         }
     })
  

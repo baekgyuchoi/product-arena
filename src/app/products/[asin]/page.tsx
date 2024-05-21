@@ -18,29 +18,51 @@ export async function generateMetadata({
     
     const product = await prisma.products.findUnique({
         where: {
-            asin: product_asin
+            asin: product_asin,
+            product_details: {
+                isNot: null
+            },
+            product_rating: {
+                isNot: null
+            },
+            article: {
+                isNot: null
+            }
         },
         include: {
             article: true,
         }
     })
+    console.log(product?.article?.review_description)
+    try{
+        const json_review = JSON.parse(JSON.parse(product?.article?.review_description as string))
 
-    const json_review = JSON.parse(JSON.parse(product?.article?.review_description as string))
+        let review_description = "Review analysis of " + product?.name
 
-    let review_description = "Review analysis of " + product?.name
+        if (json_review.positive_review_analysis && json_review.positive_review_analysis.length > 0 && json_review.positive_review_analysis[0].section_content) {
+            review_description = json_review.positive_review_analysis[0].section_content
+        }
 
-    if (json_review.positive_review_analysis && json_review.positive_review_analysis.length > 0 && json_review.positive_review_analysis[0].section_content) {
-        review_description = json_review.positive_review_analysis[0].section_content
+    
+        return {
+                title: `Review of ${product?.name}`,
+                description: `${review_description}`,
+                alternates: {
+                    canonical: '/products/' + product_asin + '/'
+                }
+            }
     }
-
-   
-    return {
-      title: `Review of ${product?.name}`,
-      description: `${review_description}`,
-      alternates: {
-        canonical: '/'
-      }
+    catch(err){
+        console.log(err)
+        return {
+            title: `Review of ${product?.name}`,
+            description: `Review analysis of ${product?.name}`,
+            alternates: {
+                canonical: '/'
+            }
+        }
     }
+    
 };
 
 
@@ -52,7 +74,16 @@ export default async function ProductPage({ params }: {
 
         const product = await prisma.products.findUnique({
             where: {
-                asin: params.asin
+                asin: params.asin,
+                product_details: {
+                    isNot: null
+                },
+                product_rating: {
+                    isNot: null
+                },
+                article: {
+                    isNot: null
+                }
             },
             include: {
                 product_rating: true,
@@ -60,7 +91,14 @@ export default async function ProductPage({ params }: {
             }
         })
         if (!params) return <div>loading...</div>;
-        
+        if (!product) return (
+            <div>
+                <meta name="robots" content="noindex" />
+                <div className="h-screen flex items-center text-2xl text-gray-100  font-black justify-center ">
+                    404: Product not found
+                </div>
+            </div>
+        );
 
         const product_data = product as ProductResult
         return(

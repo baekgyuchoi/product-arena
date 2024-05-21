@@ -43,6 +43,15 @@ export default async function CategoryPage({ params, searchParams }: {
                     some: {
                         slug: categorySlug
                     }
+                },
+                product_details: {
+                    isNot: null
+                },
+                product_rating: {
+                    isNot: null
+                },
+                article: {
+                    isNot: null
                 }
             },
             orderBy:{

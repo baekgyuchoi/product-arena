@@ -15,15 +15,35 @@ export async function generateMetadata({
     
     const product_1 = await prisma.products.findUnique({
         where: {
-            asin: product_asin_1
+            asin: product_asin_1,
+            product_details: {
+                isNot: null
+            },
+            product_rating: {
+                isNot: null
+            },
+            article: {
+                isNot: null
+            }
         },
+        
         
     })
 
     const product_2 = await prisma.products.findUnique({
         where: {
-            asin: product_asin_2
+            asin: product_asin_2,
+            product_details: {
+                isNot: null
+            },
+            product_rating: {
+                isNot: null
+            },
+            article: {
+                isNot: null
+            }
         },
+
      
     })
     try{
@@ -58,7 +78,16 @@ export async function generateMetadata({
 async function getProductData(asin: string) {
     const product = await prisma.products.findUnique({
         where: {
-            asin: asin
+            asin: asin,
+            product_details: {
+                isNot: null
+            },
+            product_rating: {
+                isNot: null
+            },
+            article: {
+                isNot: null
+            }
         },
         include: {
             product_details: true,

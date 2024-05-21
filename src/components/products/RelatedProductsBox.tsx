@@ -16,6 +16,15 @@ async function getRelatedProducts(asin_list: string[]) {
         where: {
             asin: {
                 in: asin_list
+            },
+            product_details: {
+                isNot: null
+            },
+            product_rating: {
+                isNot: null
+            },
+            article: {
+                isNot: null
             }
         },
         include: {

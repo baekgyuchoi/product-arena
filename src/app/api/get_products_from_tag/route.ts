@@ -5,6 +5,15 @@ async function get_products_from_search(search_query: string, page_number: numbe
         where: {
             name:{
                 search: search_query
+            },
+            product_details: {
+                isNot: null
+            },
+            product_rating: {
+                isNot: null
+            },
+            article: {
+                isNot: null
             }
         },
         include: {

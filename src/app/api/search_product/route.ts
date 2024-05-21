@@ -6,7 +6,15 @@ async function get_products_from_search_query(search_query: string, page_number:
     const products = await prisma.products.findMany({
         where: {
           
-                
+                product_details: {
+                    isNot: null
+                },
+                product_rating: {
+                    isNot: null
+                },
+                article: {
+                    isNot: null
+                },
             
                 // product_details: {
                 //     keywords_list: {
@@ -15,9 +23,9 @@ async function get_products_from_search_query(search_query: string, page_number:
                 // }
             
                 
-                    name: {
-                        search: '+' + search_query.split(' ').join(' +')
-                    }
+                name: {
+                    search: '+' + search_query.split(' ').join(' +')
+                }
                 
          
         },
