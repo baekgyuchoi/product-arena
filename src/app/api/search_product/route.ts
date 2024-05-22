@@ -64,6 +64,15 @@ async function get_products_from_search_query_with_category(search_query: string
             name: {
                 contains: search_query
             },
+            product_details: {
+                isNot: null
+            },
+            product_rating: {
+                isNot: null
+            },
+            article: {
+                isNot: null
+            },
             categoryId: categoryId
         },
         orderBy:{
