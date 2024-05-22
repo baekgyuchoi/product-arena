@@ -48,7 +48,7 @@ export async function generateMetadata({
                 title: `Review of ${product?.name}`,
                 description: `${review_description}`,
                 alternates: {
-                    canonical: '/products/' + product_asin + '/'
+                    canonical: '/products/' + product_asin 
                 }
             }
     }

@@ -32,6 +32,7 @@ model WebDesignAuthors {
   updatedAt   DateTime
   prompt      String   @db.Text
   description String   @db.Text
+  slug        String   @unique
 }
 
 model WebDesignKeywords {
@@ -75,19 +76,21 @@ model ProductCategories {
 }
 
 model ProductRatingBreakdown {
-  id                Int      @id @default(autoincrement())
-  productId         Int      @unique
-  critical_reviews  String   @db.MediumText
-  positive_reviews  String   @db.MediumText
-  five_star_percent Int
-  one_star          Int
-  two_star          Int
-  three_star        Int
-  four_star         Int
-  five_star         Int
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-  product           Products @relation(fields: [productId], references: [id])
+  id                   Int      @id @default(autoincrement())
+  productId            Int      @unique
+  critical_reviews     String   @db.MediumText
+  positive_reviews     String   @db.MediumText
+  five_star_percent    Int
+  one_star             Int
+  two_star             Int
+  three_star           Int
+  four_star            Int
+  five_star            Int
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  has_critical_reviews Boolean  @default(false)
+  has_positive_reviews Boolean  @default(false)
+  product              Products @relation(fields: [productId], references: [id])
 }
 
 model ProductDetails {
@@ -109,8 +112,6 @@ model ProductDetails {
   keywords_list        String?  @db.Text
   related_products     String?  @db.Text
   product              Products @relation(fields: [productId], references: [id])
-
-  @@fulltext([keywords_list])
 }
 
 model ProductTags {
@@ -145,7 +146,7 @@ model Products {
   tags            ProductTags[]
   article         ProductArticle?
   product_details ProductDetails?
-  
+
   @@fulltext([name])
 }
 
@@ -178,4 +179,45 @@ model ProductTagsToProducts {
   @@unique([A, B], map: "_ProductTagsToProducts_AB_unique")
   @@index([B], map: "_ProductTagsToProducts_B_index")
   @@map("_ProductTagsToProducts")
+}
+
+model KonaHawaiiArticles {
+  id          Int      @id @default(autoincrement())
+  title       String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  authorId    Int?
+  content     String?  @db.Text
+  has_content Boolean  @default(false)
+  title_slug  String   @unique
+
+  @@index([authorId], map: "_KonaHawaiiArticles_authorId_index")
+  @@index([has_content], map: "_KonaHawaiiArticles_has_content_index")
+}
+
+model KonaHawaiiAuthors {
+  id          Int      @id @default(autoincrement())
+  name        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  prompt      String   @db.Text
+  description String   @db.Text
+  slug        String   @unique
+}
+
+model KonaHawaiiTags {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  slug      String   @unique
+}
+
+model KonaHawaiiArticlesToKonaHawaiiTags {
+  A Int
+  B Int
+
+  @@unique([A, B], map: "_KonaHawaiiArticlesToKonaHawaiiTags_AB_unique")
+  @@index([B], map: "_KonaHawaiiArticlesToKonaHawaiiTags_B_index")
+  @@map("_KonaHawaiiArticlesToKonaHawaiiTags")
 }
