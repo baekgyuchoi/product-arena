@@ -45,6 +45,7 @@ export async function generateMetadata({
 
     
         return {
+            metadataBase: new URL("https://www.productarena.org/products/" + product_asin),
                 title: `Review of ${product?.name}`,
                 description: `${review_description}`,
                 alternates: {

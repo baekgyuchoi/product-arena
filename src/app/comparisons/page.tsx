@@ -60,14 +60,14 @@ export async function generateMetadata({
             title: `${product_1?.name} vs ${product_2?.name} Comparison`,
             description: `${comparison_json.comparison.content}`,
             alternates: {
-                canonical: '/comparison?p_a=' + product_asin_1 + '&p_b=' + product_asin_2
+                canonical: '/comparisons?p_a=' + product_asin_1 + '&p_b=' + product_asin_2
             },
             openGraph: {
                 title: `${product_1?.name} vs ${product_2?.name} Comparison`,
                 description: `${comparison_json.comparison.content}`,
                 type: 'website',
                 siteName: 'Product Arena',
-                url: 'https://www.productarena.org' + '/comparison?p_a=' + product_asin_1 + '&p_b=' + product_asin_2,
+                url: 'https://www.productarena.org' + '/comparisons?p_a=' + product_asin_1 + '&p_b=' + product_asin_2,
                 images: [
                     {
                         url: product_1?.imageURL!,
@@ -87,17 +87,18 @@ export async function generateMetadata({
     }
     catch{
         return {
+            metadataBase: new URL("https://www.productarena.org" + '/comparisons?p_a=' + product_asin_1 + '&p_b=' + product_asin_2 ),
             title: `${product_1?.name} vs ${product_2?.name} Comparison`,
             description: `Compare ${product_1?.name} and ${product_2?.name} to see which one is better based on thousands of user reviews`,
             alternates: {
-              canonical: '/comparison?p_a=' + product_asin_1 + '&p_b=' + product_asin_2
+              canonical: '/comparisons?p_a=' + product_asin_1 + '&p_b=' + product_asin_2
             },
             openGraph: {
                 title: `${product_1?.name} vs ${product_2?.name} Comparison`,
                 description: `Compare ${product_1?.name} and ${product_2?.name} to see which one is better based on thousands of user reviews`,
                 type: 'website',
                 siteName: 'Product Arena',
-                url: 'https://www.productarena.org' + '/comparison?p_a=' + product_asin_1 + '&p_b=' + product_asin_2,
+                url: 'https://www.productarena.org' + '/comparisons?p_a=' + product_asin_1 + '&p_b=' + product_asin_2,
                 images: [
                     {
                         url: product_1?.imageURL!,
