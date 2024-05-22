@@ -57,11 +57,32 @@ export async function generateMetadata({
     
     
         return {
-          title: `${product_1?.name} vs ${product_2?.name} Comparison`,
-          description: `${comparison_json.comparison.content}`,
-          alternates: {
-            canonical: '/'
-          }
+            title: `${product_1?.name} vs ${product_2?.name} Comparison`,
+            description: `${comparison_json.comparison.content}`,
+            alternates: {
+                canonical: '/comparison?p_a=' + product_asin_1 + '&p_b=' + product_asin_2
+            },
+            openGraph: {
+                title: `${product_1?.name} vs ${product_2?.name} Comparison`,
+                description: `${comparison_json.comparison.content}`,
+                type: 'website',
+                siteName: 'Product Arena',
+                url: 'https://www.productarena.org' + '/comparison?p_a=' + product_asin_1 + '&p_b=' + product_asin_2,
+                images: [
+                    {
+                        url: product_1?.imageURL!,
+                        width: 800,
+                        height: 600,
+                        alt: product_1?.name,
+                    },
+                    {
+                        url: product_2?.imageURL!,
+                        width: 800,
+                        height: 600,
+                        alt: product_2?.name,
+                    },
+                ],
+            }
         }
     }
     catch{
@@ -69,7 +90,28 @@ export async function generateMetadata({
             title: `${product_1?.name} vs ${product_2?.name} Comparison`,
             description: `Compare ${product_1?.name} and ${product_2?.name} to see which one is better based on thousands of user reviews`,
             alternates: {
-              canonical: '/'
+              canonical: '/comparison?p_a=' + product_asin_1 + '&p_b=' + product_asin_2
+            },
+            openGraph: {
+                title: `${product_1?.name} vs ${product_2?.name} Comparison`,
+                description: `Compare ${product_1?.name} and ${product_2?.name} to see which one is better based on thousands of user reviews`,
+                type: 'website',
+                siteName: 'Product Arena',
+                url: 'https://www.productarena.org' + '/comparison?p_a=' + product_asin_1 + '&p_b=' + product_asin_2,
+                images: [
+                    {
+                        url: product_1?.imageURL!,
+                        width: 800,
+                        height: 600,
+                        alt: product_1?.name,
+                    },
+                    {
+                        url: product_2?.imageURL!,
+                        width: 800,
+                        height: 600,
+                        alt: product_2?.name,
+                    },
+                ],
             }
           }
     }

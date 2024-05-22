@@ -49,7 +49,23 @@ export async function generateMetadata({
                 description: `${review_description}`,
                 alternates: {
                     canonical: '/products/' + product_asin 
-                }
+                },
+                openGraph: {
+                    title: `Review of ${product?.name}`,
+                    description: `${review_description}`,
+                    type: 'website',
+                    siteName: 'Product Arena',
+                    url: 'https://www.productarena.org' + '/products/' + product_asin,
+                    images: [
+                        {
+                            url: product?.imageURL!,
+                            width: 800,
+                            height: 600,
+                            alt: product?.name,
+                        },
+                    ],
+                    
+                },
             }
     }
     catch(err){
