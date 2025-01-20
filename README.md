@@ -15,14 +15,14 @@ This is a repository for Product Arena - a product that used to be owned by Song
 
 The site is now closed.
 
-This site was built to
-1. Scrape product details from Amazon from specific categories using an Amazon web scraper
-2. Read mass amounts of reviews and perform sentiment analysis with AI
-3. Generate SEO-optimized pages to provide customized 1:1 product comparisons between "all" products within a category
-   ex. Monitors, Laptops, Phones, Cameras, etc
-4. 1:1 product comparisons open up NxN level of article pages that can each be indexed on Google SEO. Each article is unique and significant (most of them do not exist on the internet yet, so it provides value). Google SEO algorithm appreciates this and does not flag our articles even if it is mass produced
+This site was developed to:
 
-To be honest, I ran out of money while running project and had to shut it down when it was at ~300visits per day with ~7000 pages. Cost for AI tokens and time it took to get return via small percentages on Amazon Affiliates was not enough to keep page up. Original plan was to get ~500,000 + pages in short amount of time to keep page self-sufficient financially.
+1. Scrape Product Details: Extract product information from Amazon across specific categories using a custom-built Amazon web scraper.
+Perform Sentiment Analysis: Process and analyze large volumes of product reviews with AI-driven sentiment analysis to derive meaningful insights.
+2. Generate SEO-Optimized Pages: Create customized 1:1 product comparison pages for every product within a category (e.g., Monitors, Laptops, Phones, Cameras), optimized for search engine indexing.
+3. Expand Content Reach: The 1:1 comparisons exponentially increased the number of unique article pages, enhancing SEO performance and ensuring each page provided valuable, unique content that was not widely available online. Google's SEO algorithm recognized the uniqueness and utility of these articles, which prevented them from being flagged as mass-produced content.
+
+Unfortunately, the project faced financial challenges. Despite achieving around 300 daily visits and generating approximately 7,000 pages, the expenses for AI tokens and the time required to earn returns via Amazon Affiliates were unsustainable. The initial goal was to scale up to over 500,000 pages quickly to achieve financial self-sufficiency, but the costs ultimately led to the shutdown of the site.
 
 
 
